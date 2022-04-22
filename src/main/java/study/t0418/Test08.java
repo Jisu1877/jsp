@@ -1,4 +1,4 @@
-package t0418;
+package study.t0418;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/T08")
+//@WebServlet("/T08")
 public class Test08 extends HttpServlet {
 
 	@Override

@@ -1,4 +1,4 @@
-package t0418;
+package study.t0418;
 
 public class Test01 {
 	public static void main(String[] args) {

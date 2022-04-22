@@ -1,4 +1,4 @@
-package t0418;
+package study.t0418;
 
 import java.io.IOException;
 import java.io.PrintWriter;

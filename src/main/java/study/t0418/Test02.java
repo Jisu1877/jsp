@@ -1,4 +1,4 @@
-package t0418;
+package study.t0418;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class Test03
+ * Servlet implementation class Test02
  */
-@WebServlet("/T03")
-public class Test03 extends HttpServlet {
+@WebServlet("/Test02")
+public class Test02 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Test03() {
+    public Test02() {
         super();
         // TODO Auto-generated constructor stub
     }

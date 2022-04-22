@@ -12,8 +12,8 @@
 <div class="container">
 	<h2>test08.jsp</h2>
 	<h2>JSP Form Tag 연습(GET/POST방식)</h2>
-	<form name="myForm" method="post" action="test08Ok.jsp">
-	<!-- <form name="myForm" method="get" action="../T08"> --> <!-- ../이라고 하면, main폴더로 올라가는 것. main폴더 아래에 T08_2 이름의 컨트롤러를 가진 파일을 찾는 것. -->
+	<!-- <form name="myForm" method="post" action="test08Ok.jsp"> -->
+	<form name="myForm" method="get" action="../T08"> <!-- ../이라고 하면, main폴더로 올라가는 것. main폴더 아래에 T08_2 이름의 컨트롤러를 가진 파일을 찾는 것. -->
 		<p>아이디 : <input type="text" name="mid" autofocus/></p>
 		<p>비밀번호 : <input type="password" name="pwd" /></p>
 		<p>성명 : <input type="text" name="name" /></p>
