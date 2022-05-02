@@ -3,7 +3,7 @@
 <!-- test09.jsp -->
 
 <%
-	request.setCharacterEncoding("utf-8"); /* 한글을 사용할땐 request 환경설정 필요.  */
+	/* request.setCharacterEncoding("utf-8"); */ /* 한글을 사용할땐 request 환경설정 필요.  */
 
 	String mid = request.getParameter("mid");
 	String pwd = request.getParameter("pwd");

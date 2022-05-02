@@ -1,4 +1,4 @@
-<%@page import="t0420.SungjukVO"%>
+<%@page import="study.t0420.SungjukVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
 	System.out.println("이곳은 sungjukView3.jsp입니다.");

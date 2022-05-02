@@ -13,7 +13,7 @@
 	<h2>test10.jsp</h2>
 	<h2>JSP Form Tag 연습(service메소드에서 처리)</h2>
 	<!-- <form name="myForm" method="post" action="../T10">  -->
-	<form name="myForm" method="post" action="../T10_2"> 
+	<form name="myForm" method="post" action="<%=request.getContextPath()%>/T10_2"> 
 		<p>아이디 : <input type="text" name="mid" value="honh123" autofocus/></p>
 		<p>비밀번호 : <input type="password" name="pwd" value="1234" /></p>
 		<p>성명 : <input type="text" name="name" value="홍길동" /></p>

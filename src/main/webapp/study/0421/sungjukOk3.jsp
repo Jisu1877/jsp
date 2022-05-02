@@ -1,4 +1,4 @@
-<%@ page import="t0420.SungjukVO3"%>
+<%@ page import="study.t0420.SungjukVO3"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!-- 외부라이브러리 세팅 -->
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>

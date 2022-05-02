@@ -53,7 +53,7 @@ public class Test10_2 extends HttpServlet {
 		out.println("<br/>ContextPath : " + request.getContextPath());
 		out.println("<br/>현재 사용중인 프로토콜 : " + request.getProtocol());
 		out.println("<br/>");
-		out.println("<br/><a href='"+request.getContextPath()+"/0418/test10.jsp'>돌아가기</a>");
+		out.println("<br/><a href='"+request.getContextPath()+"/study/0418/test10.jsp'>돌아가기</a>");
 	}
 
 }

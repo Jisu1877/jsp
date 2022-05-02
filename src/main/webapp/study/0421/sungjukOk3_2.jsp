@@ -12,7 +12,7 @@
 
 <!-- 자바 클래스를 사용할 경우는 jsp 액션태그(useBean)을 사용한다.  
 id에는 클래스 변수명 / class에는 클래스이름을 적는다.(패키지명과 함께 적는다)-->
-<jsp:useBean id="vo" class="t0420.SungjukVO3"></jsp:useBean>
+<jsp:useBean id="vo" class="study.t0420.SungjukVO3"></jsp:useBean>
 
 <!-- 앞(sungjuk3.jsp)에서 넘어온 변수의 값을 vo객체에 저장하려면?  jsp 액션태그(setProperty)-->
 <!-- name:값을 저장할 클래스변수명(id), property:Form태그에서 넘어온 변수명  -->

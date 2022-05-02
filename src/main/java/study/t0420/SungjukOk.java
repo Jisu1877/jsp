@@ -128,8 +128,8 @@ public class SungjukOk extends HttpServlet {
 			return;
 		}
 		else {
-			vo.setKor(intMat);
-			vo.setKor(intEng);
+			vo.setMat(intMat);
+			vo.setEng(intEng);
 			vo.setKor(intKor);
 			vo.setHakyun(hakyun);
 			vo.setName(name);
