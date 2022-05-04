@@ -28,6 +28,10 @@
     	else if(msg == "adminLogOutOk") msg = "관리자 로그아웃 되었습니다.";
     	else if(msg == "guestDeleteOk") msg = "방명록 삭제가 완료되었습니다.";
     	else if(msg == "guestDeleteNo") msg = "방명록 삭제에 실패했습니다. 다시 시도해주세요.";
+    	else if(msg == "memJoinOk") msg = "회원가입이 완료되었습니다.";
+    	else if(msg == "memJoinNo") msg = "회원가입에 실패했습니다.";
+    	else if(msg == "idCheckNo") msg = "중복된 아이디입니다.";
+    	else if(msg == "nickCheckNo") msg = "중복된 닉네임입니다.";
     	
     	alert(msg);
     	if(url != "") location.href = url;
