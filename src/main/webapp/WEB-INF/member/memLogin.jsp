@@ -44,12 +44,12 @@
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="container p-3 border">
-				<form name="myForm" method="post" action="${ctp}/guestInputOk.gu" class="was-validated">
+				<form name="myForm" method="post" action="${ctp}/memLoginOk.mem" class="was-validated">
 					<h2 class="text-center">회원 로그인</h2>
 					<p class="text-center">회원 아이디와 비밀번호를 입력해주세요.</p>
 					<div class="form-group">
 				      <label for="mid">회원 아이디 :</label>
-				      <input type="text" class="form-control" id="mid" placeholder="아이디를 입력하세요." name="mid" required autofocus>
+				      <input type="text" class="form-control" id="mid" value="${mid}" placeholder="아이디를 입력하세요." name="mid" required autofocus>
 				      <div class="valid-feedback">입력성공.</div>
 				      <div class="invalid-feedback">회원 아이디는 필수 입력사항입니다.</div>
 				    </div>
