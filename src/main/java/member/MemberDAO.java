@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.apache.catalina.webresources.EmptyResource;
 
 import conn.GetConn;
 
@@ -91,7 +94,7 @@ public class MemberDAO {
 	public MemberVO getMemLoginOk(String mid, String pwd) {
 		vo = new MemberVO();
 		try {
-			sql = "select * from member where mid = ? and pwd = ?";
+			sql = "select * from member where mid = ? and pwd = ? and userDel = 'NO'";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			pstmt.setString(2, pwd);
@@ -100,9 +103,11 @@ public class MemberDAO {
 				vo.setNickName(rs.getString("nickName"));
 				vo.setLevel(rs.getInt("level"));
 				vo.setLastDate(rs.getString("lastDate"));
-				vo.setPoint(rs.getInt("point") + 1);
-				vo.setTodayCnt(rs.getInt("todayCnt") + 1);
-				vo.setVisitCnt(rs.getInt("visitCnt") + 1);
+				vo.setPoint(rs.getInt("point"));
+				vo.setTodayCnt(rs.getInt("todayCnt"));
+//				vo.setPoint(rs.getInt("point") + 1);
+//				vo.setTodayCnt(rs.getInt("todayCnt") + 1);
+//				vo.setVisitCnt(rs.getInt("visitCnt") + 1);
 			}
 		} catch (SQLException e) {
 			System.out.println("sql 에러" + e.getMessage());
@@ -112,12 +117,13 @@ public class MemberDAO {
 		return vo;
 	}
 	
-	//방문수, 오늘방문수, 포인트 증가하기
-	public void setMemPointUpdate(String mid) {
+	//방문수, 오늘방문수, 포인트, 최종방문일 증가하기
+	public void setMemPointUpdate(String mid, int point) {
 		try {
-			sql = "update member set point= point + 1, visitCnt = visitCnt + 1, todayCnt = todayCnt + 1 where mid = ?";
+			sql = "update member set point= ?, visitCnt = visitCnt + 1, todayCnt = todayCnt + 1, lastDate=now() where mid = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, mid);
+			pstmt.setInt(1, point);
+			pstmt.setString(2, mid);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("sql 에러" + e.getMessage());
@@ -134,31 +140,32 @@ public class MemberDAO {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			rs = pstmt.executeQuery();
-			rs.next();
 			
-			vo.setIdx(rs.getInt("idx"));
-			vo.setMid(rs.getString("mid"));
-			vo.setPwd(rs.getString("pwd"));
-			vo.setNickName(rs.getString("nickName"));
-			vo.setName(rs.getString("name"));
-			vo.setGender(rs.getString("gender"));
-			vo.setBirthday(rs.getString("birthday"));
-			vo.setTel(rs.getString("tel"));
-			vo.setAddress(rs.getString("address"));
-			vo.setEmail(rs.getString("email"));
-			vo.setHomePage(rs.getString("homePage"));
-			vo.setJob(rs.getString("job"));
-			vo.setHobby(rs.getString("hobby"));
-			vo.setPhoto(rs.getString("photo"));
-			vo.setContent(rs.getString("content"));
-			vo.setUserInfor(rs.getString("userInfor"));
-			vo.setUserDel(rs.getString("userDel"));
-			vo.setPoint(rs.getInt("point"));
-			vo.setLevel(rs.getInt("level"));
-			vo.setVisitCnt(rs.getInt("visitCnt"));
-			vo.setStartDate(rs.getString("startDate"));
-			vo.setLastDate(rs.getString("lastDate"));
-			vo.setTodayCnt(rs.getInt("todayCnt"));
+			if(rs.next()) {			
+				vo.setIdx(rs.getInt("idx"));
+				vo.setMid(rs.getString("mid"));
+				vo.setPwd(rs.getString("pwd"));
+				vo.setNickName(rs.getString("nickName"));
+				vo.setName(rs.getString("name"));
+				vo.setGender(rs.getString("gender"));
+				vo.setBirthday(rs.getString("birthday"));
+				vo.setTel(rs.getString("tel"));
+				vo.setAddress(rs.getString("address"));
+				vo.setEmail(rs.getString("email"));
+				vo.setHomePage(rs.getString("homePage"));
+				vo.setJob(rs.getString("job"));
+				vo.setHobby(rs.getString("hobby"));
+				vo.setPhoto(rs.getString("photo"));
+				vo.setContent(rs.getString("content"));
+				vo.setUserInfor(rs.getString("userInfor"));
+				vo.setUserDel(rs.getString("userDel"));
+				vo.setPoint(rs.getInt("point"));
+				vo.setLevel(rs.getInt("level"));
+				vo.setVisitCnt(rs.getInt("visitCnt"));
+				vo.setStartDate(rs.getString("startDate"));
+				vo.setLastDate(rs.getString("lastDate"));
+				vo.setTodayCnt(rs.getInt("todayCnt"));
+			}
 			
 		} catch (SQLException e) {
 			System.out.println("sql 에러" + e.getMessage());
@@ -187,5 +194,182 @@ public class MemberDAO {
 			getConn.rsClose();
 		}
 		return guestCnt;
+	}
+	
+	//아이디 찾기
+	public String memIdFind(String email) {
+		String mid = "";
+		try {
+			sql = "select mid from member where email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				mid = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return mid;
+	}
+	
+	//비밀번호찾기
+	public String memPwdFind(String mid, String email) {
+		String name = "";
+		try {
+			sql = "select name from member where mid = ? and email = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.setString(2, email);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				name = rs.getString(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return name;
+	}
+	
+	//비밀번호 재생성
+	public int memPwdInput(String pwd,String mid) {
+		int res = 0;
+		try {
+			sql = "update member set pwd = ? where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pwd);
+			pstmt.setString(2, mid);
+			pstmt.executeUpdate();
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+	
+	//오늘방문처음시는 오늘방문카운트(todayCnt)를 0으로 세팅한다.
+	public void setTodayCntUpdate(String mid) {
+		try {
+			sql = "update member set todayCnt = 0 where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		
+	}
+	
+	//회원자료 전체보기
+	public ArrayList<MemberVO> getMemList(int level) {
+		ArrayList<MemberVO> vos = new ArrayList<MemberVO>();
+		try {
+			if(level != 0) {
+				sql = "select * from member where userInfor = '공개' order by idx desc";
+			}
+			else {
+				sql = "SELECT *,timestampdiff(DAY, lastDate, NOW()) as applyDiff from member order by idx desc";
+			}
+			pstmt = conn.prepareStatement(sql);
+			rs = pstmt.executeQuery();
+			
+				while(rs.next()) {
+					vo = new MemberVO();
+					
+					vo.setIdx(rs.getInt("idx"));
+					vo.setMid(rs.getString("mid"));
+					vo.setPwd(rs.getString("pwd"));
+					vo.setNickName(rs.getString("nickName"));
+					vo.setName(rs.getString("name"));
+					vo.setGender(rs.getString("gender"));
+					vo.setBirthday(rs.getString("birthday"));
+					vo.setTel(rs.getString("tel"));
+					vo.setAddress(rs.getString("address"));
+					vo.setEmail(rs.getString("email"));
+					vo.setHomePage(rs.getString("homePage"));
+					vo.setJob(rs.getString("job"));
+					vo.setHobby(rs.getString("hobby"));
+					vo.setPhoto(rs.getString("photo"));
+					vo.setContent(rs.getString("content"));
+					vo.setUserInfor(rs.getString("userInfor"));
+					vo.setUserDel(rs.getString("userDel"));
+					vo.setPoint(rs.getInt("point"));
+					vo.setLevel(rs.getInt("level"));
+					vo.setVisitCnt(rs.getInt("visitCnt"));
+					vo.setStartDate(rs.getString("startDate"));
+					vo.setLastDate(rs.getString("lastDate"));
+					vo.setTodayCnt(rs.getInt("todayCnt"));
+					if(level == 0) {
+						vo.setApplyDiff(rs.getInt("applyDiff"));
+					}
+					
+					vos.add(vo);
+				}
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
+	}
+	
+	//회원 등급 변경 처리
+	public void setMemLevelChange(int idx, int level) {
+		try {
+			sql = "update member set level = ? where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, level);
+			pstmt.setInt(2, idx);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+	}
+	
+	//회원 탈퇴 신청처리하기
+	public int setMemDeleteUpdate(String mid) {
+		int res = 0;
+		try {
+			sql = "update member set userDel = 'OK' where mid = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mid);
+			pstmt.executeUpdate();
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
+	}
+	
+	
+	//탈퇴신청후 30일이 경과된 회원을 DB에서 완전히 삭제처리한다.
+	public int setUserDelete(int idx) {
+		int res = 0;
+		try {
+			sql = "delete from member where idx = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, idx);
+			pstmt.executeUpdate();
+			res = 1;
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.pstmtClose();
+		}
+		return res;
 	}
 }

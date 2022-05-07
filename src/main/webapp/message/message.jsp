@@ -36,6 +36,16 @@
     	else if(msg == "loginNo") msg = "로그인 실패. 입력하신 아이디와 비밀번호를 확인하세요.";
     	else if(msg == "loginOk") msg = '${sMid}'+"님 로그인 완료되었습니다.";
     	else if(msg == "memLogOutOk") msg = val+"님 로그아웃되었습니다.";
+    	else if(msg == "MemPwdFindOk") msg = "입력 정보 확인 완료. 비밀번호 재생성을 진행해주세요.";
+    	else if(msg == "MemPwdFindNo") msg = "입력하신 정보와 일치하는 회원이 없습니다.";
+    	else if(msg == "MemPwdInputNo") msg = "비밀번호 재생성에 실패했습니다.";
+    	else if(msg == "MemPwdInputOk") msg = "비밀번호 재생성 완료.";
+    	else if(msg == "levelChangeOk") msg = "등급이 변경되었습니다.";
+    	else if(msg == "memDeleteUpdateNo") msg = "회원탈퇴에 실패했습니다.";
+    	else if(msg == "memDeleteUpdateOk") msg = "회원탈퇴가 완료되었습니다.";
+    	else if(msg == "UserDeleteOk") msg = "회원DB에서 삭제가 완료되었습니다.";
+    	else if(msg == "UserDeleteNo") msg = "회원 삭제에 실패했습니다.";
+    	
     	
     	alert(msg);
     	if(url != "") location.href = url;

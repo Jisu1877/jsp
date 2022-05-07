@@ -33,7 +33,7 @@ public class MemberController extends HttpServlet {
 		else if(com.equals("memLogOut")) {
 			command = new MemLogOutCommand();
 			command.execute(request, response);
-			viewPage += "/member/memMain.jsp";
+			viewPage = "/message/message.jsp";
 		}
 		else if(com.equals("memJoin")) {
 			viewPage += "/member/memJoin.jsp";
@@ -58,6 +58,62 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/member/memMain.jsp";
 		}
+		else if(com.equals("memIdFind")) {
+			viewPage += "/member/memIdFind.jsp";
+		}
+		else if(com.equals("memIdFindOk")) {
+			command = new MemIdFindCommand();
+			command.execute(request, response);
+			viewPage += "/member/memIdFind.jsp";
+		}
+		else if(com.equals("memPwdFind")) {
+			viewPage += "/member/memPwdFind.jsp";
+		}
+		else if(com.equals("memPwdFindOk")) {
+			command = new MemPwdFindCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		else if(com.equals("memPwdInput")) {
+			viewPage += "/member/memPwdInput.jsp";
+		}
+		else if(com.equals("memPwdInputOk")) {
+			command = new MemPwdInputOkCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		else if(com.equals("memList")) {
+			command = new MemListCommand();
+			command.execute(request, response);
+			viewPage += "/member/memList.jsp";
+		}
+		else if(com.equals("memInfor")) {
+			command = new MemInforCommand();
+			command.execute(request, response);
+			viewPage = "/controller/controller.jsp";
+		}
+		else if(com.equals("memInforOk")) {
+			command = new MemInforOkCommand();
+			command.execute(request, response);
+			viewPage += "/member/memInfor.jsp";
+		}
+		else if(com.equals("adInforOk")) {
+			command = new AdInforOkCommand();
+			command.execute(request, response);
+			viewPage += "/member/memInfor_admin.jsp";
+		}
+		else if(com.equals("memDelete")) {
+			command = new MemDeleteCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		else if(com.equals("memUserDelete")) {
+			command = new MemUserDeleteCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		
+		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);
 	}

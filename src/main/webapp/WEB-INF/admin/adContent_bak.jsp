@@ -5,14 +5,18 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>adMenu.jsp(관리자메뉴)</title>
+    <title>adContent.jsp</title>
     <%@ include file="/include/bs4.jsp" %>
-    <frameset cols="150px, *">
-    	<frame src="${ctp}/adLeft.ad" name="adLeft" frameborder="0"/>
-    	<frame src="${ctp}/adContent.ad" name="adContent" frameborder="0"/>
-    </frameset>
 </head>
 <body>
-
+<p><br/><p>
+<div class="container">
+	<h3>관리자 페이지</h3>
+	<hr>
+	<pre>
+		신규 회원...
+		새로 올린 방명록글...
+	</pre>
+</div>
 </body>
 </html>

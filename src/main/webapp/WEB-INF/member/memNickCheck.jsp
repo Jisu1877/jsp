@@ -17,11 +17,17 @@
     	//중복아이디를 다시 체크하기
     	function NickCheck() {
     		let nickName = childForm.nickName.value;
+    		let regNickName = /^[가-힣]+$/;
     		
     		if(nickName == "") {
     			alert("닉네임을 입력하세요");
     			childForm.nickName.focus();
     		}
+    		else if(!regNickName.test(nickName)) {
+                alert("닉네임은 한글만 사용가능합니다.");
+                myForm.nickName.focus();
+                return false;
+            }
     		else {
     			childForm.submit();
     		}

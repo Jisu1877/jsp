@@ -18,7 +18,6 @@
     	function fCheck() {
     		let mid = document.getElementById("mid").value;
     		let pwd = document.getElementById("pwd").value;
-    		
     	/* 	let regMid = /^[a-z0-9_]{4,20}$/;
     		let regPwd = /(?=.*[a-zA-ZS])(?=.*?[#?!@$%^&*-]).{6,24}/; */
 			
@@ -34,6 +33,21 @@
 	    		myForm.submit();
     		}
 		}
+    	//아이디찾기
+    	function idFind() {
+      		let url = "${ctp}/memIdFind.mem";
+   			window.open(url, "nWin", "width=700px,height=350px, left=500px, top=200px, resizable = no, scrollbars = no");
+    	}
+    	//비밀번호찾기
+    	function pwdFind() {
+    		let mid = document.getElementById("mid").value;
+      		let url = "${ctp}/memPwdFind.mem";
+      		let winX = 700;
+            let winY = 450;
+            let x = (window.screen.width/2) - (winX/2);
+            let y = (window.screen.height/2) - (winY/2)
+   			window.open(url, "nWin", "width="+winX+",height="+winY+", left="+x+", top="+y+", resizable = no, scrollbars = no");
+    	}
     </script>
 </head>
 <body>
@@ -67,7 +81,7 @@
 					</div>
 					<div class="row" style="font-size:12px">
 						<span class="col"><input type="checkbox" name="idCheck" checked />&nbsp;아이디 저장</span>
-						<span class="col"><a href="#">아이디 찾기</a> / <a href="#">비밀번호 찾기</a></span>
+						<span class="col"><a href="javascript:idFind()">아이디 찾기</a> / <a href="javascript:pwdFind()">비밀번호 찾기</a></span>
 					</div>
 				</form>
 			</div>

@@ -7,7 +7,7 @@
 	String admin = (String) session.getAttribute("sAdmin") == null ? "" : (String) session.getAttribute("sAdmin");
 	ArrayList<GuestVO> vos = (ArrayList<GuestVO>) request.getAttribute("vos");
 	
-	int pag = (int) request.getAttribute("pag");
+	int pag = request.getAttribute("pag") == null ? 1 : (int) request.getAttribute("pag");
 	int totPage = (int) request.getAttribute("totPage");
 	int curScrStartNo = (int) request.getAttribute("curScrStartNo");
 	int blockSize = (int) request.getAttribute("blockSize");
@@ -37,8 +37,6 @@
     </style>
 </head>
 <body>
-<%@ include file="/include/header_home.jsp" %>
-<%@ include file="/include/nav.jsp" %>
 <p><br/><p>
 <div class="container">
 	<h2 class="text-center m-3">방 명 록 리 스 트</h2>
@@ -47,19 +45,15 @@
 if(!admin.equals("adminOk")) {
 %>
 		<div class="col text-left">
-			<a href="${ctp}/adminLogin.gu" class="btn btn-secondary">관리자</a>
-		</div>
+		<a href="${ctp}/adminLogin.gu" class="btn btn-secondary">관리자</a>
 <%
-} else {
+} else
 %>
-		<div class="col text-left">
-			<a href="${ctp}/adminLogOut.gu" class="btn btn-secondary">관리자 로그아웃</a>
-		</div>
+			<div class="col text-left"><a href="${ctp}/adminLogOut.gu" class="btn btn-secondary">관리자 로그아웃</a></div>
 <%
-}
+
 %>
-		<div class="col text-right">
-			<a href="${ctp}/guestInput.gu" class="btn btn-secondary">글쓰기</a>
+		<a href="${ctp}/guestInput.gu" class="btn btn-secondary">글쓰기</a>
 		</div>
 		<%-- <div class="col text-left"><a href="${ctp}/guestInput.gu" class="btn btn-secondary">글쓰기</a></div> --%>
 		
@@ -68,8 +62,8 @@ if(!admin.equals("adminOk")) {
 			<%
 			if(pag > 1)
 			%>
-				<a href = "guestList.gu?pag=1" title="첫페이지">|◁</a>
-				<a href = "guestList.gu?pag=<%=pag-1%>" title="이전페이지">◀</a>
+				<a href = "adGuestList.ad?pag=1" title="첫페이지">|◁</a>
+				<a href = "adGuestList.ad?pag=<%=pag-1%>" title="이전페이지">◀</a>
 			<%
 
 			%>
@@ -77,8 +71,8 @@ if(!admin.equals("adminOk")) {
 			<%
 			if(pag != totPage)
 			%>
-				<a href = "guestList.gu?pag=<%=pag+1%>" title="다음페이지">▶</a>
-				<a href = "guestList.gu?pag=<%=totPage%>" title="마지막페이지">▷|</a>
+				<a href = "adGuestList.ad?pag=<%=pag+1%>" title="다음페이지">▶</a>
+				<a href = "adGuestList.ad?pag=<%=totPage%>" title="마지막페이지">▷|</a>
 			<%
 
 			%>
@@ -147,31 +141,29 @@ if(!admin.equals("adminOk")) {
 	<!-- 블록 페이징 처리 시작 -->
 	<div class="text-center">
 		<%if(pag != 1) { %>
-			[<a href = "guestList.gu?pag=1">첫페이지</a>]
+			[<a href = "adGuestList.ad?pag=1">첫페이지</a>]
 		<% } %>
 		<%if(curBlock > 0) { %>
-			[<a href = "guestList.gu?pag=<%=(curBlock-1)*blockSize+1%>">이전블록</a>]
+			[<a href = "adGuestList.ad?pag=<%=(curBlock-1)*blockSize+1%>">이전블록</a>]
 		<% } %>
 		
 		<%
 			for(int i=(curBlock*blockSize)+1; i<=(curBlock*blockSize)+blockSize; i++) {
 				if(i>totPage) break;
-				if(i == pag) out.println("[<a href='guestList.gu?pag="+i+"'><font color='red'><b>"+i+"</b></font></a>]");
-				else out.println("[<a href='guestList.gu?pag="+i+"'>"+i+"</a>]");
+				if(i == pag) out.println("[<a href='adGuestList.ad?pag="+i+"'><font color='red'><b>"+i+"</b></font></a>]");
+				else out.println("[<a href='adGuestList.ad?pag="+i+"'>"+i+"</a>]");
 			}
 		%>
 		<%if(curBlock < lastBlock) { %>
-			[<a href = "guestList.gu?pag=<%=(curBlock+1)*blockSize+1%>">다음블록</a>]
+			[<a href = "adGuestList.ad?pag=<%=(curBlock+1)*blockSize+1%>">다음블록</a>]
 		<% } %>
 		
 		<%if(pag != totPage) { %>
-			[<a href = "guestList.gu?pag=<%=totPage%>">마지막페이지</a>]
+			[<a href = "adGuestList.ad?pag=<%=totPage%>">마지막페이지</a>]
 		<% } %>
 	</div>
 	<!-- 블록 페이징 처리 끝 -->
 
 </div>
-<p><br/><p>
-<%@ include file="/include/footer.jsp" %>
 </body>
 </html>

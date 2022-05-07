@@ -25,6 +25,9 @@ public class MemberVO {
 	private String lastDate;
 	private int todayCnt;
 	
+	private String strLevel; //회원 등급을 문자로 저장하는 필드
+	private int applyDiff; 	//날짜 차이를 저장하는 필드
+	
 	public int getIdx() {
 		return idx;
 	}
@@ -163,7 +166,18 @@ public class MemberVO {
 	public void setTodayCnt(int todayCnt) {
 		this.todayCnt = todayCnt;
 	}
-	
+	public String getStrLevel() {
+		return strLevel;
+	}
+	public void setStrLevel(String strLevel) {
+		this.strLevel = strLevel;
+	}
+	public int getApplyDiff() {
+		return applyDiff;
+	}
+	public void setApplyDiff(int applyDiff) {
+		this.applyDiff = applyDiff;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [idx=" + idx + ", mid=" + mid + ", pwd=" + pwd + ", nickName=" + nickName + ", name=" + name
@@ -171,7 +185,8 @@ public class MemberVO {
 				+ email + ", homePage=" + homePage + ", job=" + job + ", hobby=" + hobby + ", photo=" + photo
 				+ ", content=" + content + ", userInfor=" + userInfor + ", userDel=" + userDel + ", point=" + point
 				+ ", level=" + level + ", visitCnt=" + visitCnt + ", startDate=" + startDate + ", lastDate=" + lastDate
-				+ ", todayCnt=" + todayCnt + "]";
+				+ ", todayCnt=" + todayCnt + ", strLevel=" + strLevel + ", applyDiff=" + applyDiff + "]";
 	}
+	
 	
 }

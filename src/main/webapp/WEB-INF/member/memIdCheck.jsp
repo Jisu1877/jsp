@@ -17,11 +17,17 @@
     	//중복아이디를 다시 체크하기
     	function idCheck() {
     		let mid = childForm.mid.value;
+    		let regMid = /^[a-z0-9_]{4,20}$/;
     		
     		if(mid == "") {
     			alert("아이디를 입력하세요");
     			childForm.mid.focus();
     		}
+    		else if(!regMid.test(mid)) {
+                alert("아이디는 영문 소문자와 숫자, 언더바(_)만 사용가능합니다.(길이는 4~20자리까지 허용)");
+                myForm.mid.focus();
+                return false;
+            }
     		else {
     			childForm.submit();
     		}
