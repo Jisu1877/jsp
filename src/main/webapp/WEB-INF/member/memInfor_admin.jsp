@@ -7,11 +7,17 @@
 <head>
     <meta charset="UTF-8" name="viewport" content="width=device-width, initial-scale=1">
     <title>memInfor.jsp</title>
+    <jsp:include page="/include/bs4.jsp"/>
     <style>
 	html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
-	
 	</style>
-    <jsp:include page="/include/bs4.jsp"/>
+    <script type="text/javascript">
+	    function userDelCheck(idx) {
+			let ans = confirm("정말 해당 회원을 삭제처리하시겠습니까?");
+			if(ans) location.href="${ctp}/memUserDelete.mem?idx="+idx;
+			
+		}
+    </script>
 </head>
 <body class="w3-light-grey">
 
@@ -20,7 +26,7 @@
 
   <!-- The Grid -->
   <div class="w3-row-padding">
-  
+  <h2 class="text-center">회원 상세 정보</h2><br>
     <!-- Left Column -->
     <div class="w3-half">
     
@@ -115,7 +121,15 @@
 	  				<tr><td>탈퇴신청 여부&nbsp; |&nbsp; 활동중</td></tr>
 	  			</c:when>
 	  			<c:otherwise>
-	  				<tr><td>탈퇴신청 여부&nbsp; |&nbsp; <font color="red">탈퇴신청 중</font></td></tr>
+	  				<tr><td>탈퇴신청 여부&nbsp; |&nbsp; 
+	  				<c:if test="${vo.userDel == 'OK'}">
+						<font color="red">탈퇴신청</font>&nbsp; 
+						(경과일 : <font color="red">${vo.applyDiff}</font>일)&nbsp;&nbsp;
+						<c:if test="${vo.applyDiff > 30}">
+							<button type="button" class="btn btn-danger btn-sm" onclick="javascript:userDelCheck(${vo.idx})">탈퇴처리</button>
+						</c:if>
+					</c:if>
+	  				</td></tr>
 	  			</c:otherwise>
 	  		</c:choose>
 	  		<tr><td>오늘 방문횟수&nbsp; |&nbsp; ${vo.todayCnt}회</td></tr>

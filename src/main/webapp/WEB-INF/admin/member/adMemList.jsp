@@ -11,17 +11,42 @@
     	function levelChange() {
 			alert("등급변경 버튼을 클릭하시면 선택된 등급으로 설정됩니다.");
 		}
+    	
     	function userDelCheck(idx) {
     		let ans = confirm("정말 해당 회원을 삭제처리하시겠습니까?");
     		if(ans) location.href="${ctp}/memUserDelete.mem?idx="+idx;
 			
+		}
+    	
+    	function fnChoiceLevel() {
+			let choiceLevel = document.getElementById("cLevel").value;
+			document.getElementById("cLevel").value = choiceLevel;
+			location.href="${ctp}/adMemChoice.ad?choiceLevel="+choiceLevel;
 		}
     </script>
 </head>
 <body>
 <p><br/><p>
 <div class="container">
-	<h2 class="text-center">전체 회원 리스트</h2><br>
+	<h2 class="text-center">전체 회원 리스트</h2>
+	<div class="row">
+		<div class="col"></div>
+		<div class="col"></div>
+		<div class="col"></div>
+		<div class="col"></div>
+		<form name="choiceForm" method="post" action="${ctp}/adMemChoice.ad" class="col text-right">
+			<select name="cLevel" id="cLevel" onchange="fnChoiceLevel()" class="form-control">
+				<option value="0" <c:if test="${param.choiceLevel == 0}">selected</c:if>>관리자</option>
+				<option value="4" <c:if test="${param.choiceLevel == 4}">selected</c:if>>운영자</option>
+				<option value="3" <c:if test="${param.choiceLevel == 3}">selected</c:if>>우수회원</option>
+				<option value="2" <c:if test="${param.choiceLevel == 2}">selected</c:if>>정회원</option>
+				<option value="1" <c:if test="${param.choiceLevel == 1}">selected</c:if>>준회원</option>
+			</select>
+			<input type="hidden" name="choiceLevel"/>
+		</form>
+			<input type="button" value="전체조회" onclick="location.href='${ctp}/adMemList.ad'" class="btn btn-dark btn-sm mr-3"/>
+	</div>
+	<br>
 	<table class="table table-hover text-center">
 		<tr class="table-dark text-dark">
 			<th>번호</th>

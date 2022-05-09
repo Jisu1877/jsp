@@ -37,6 +37,11 @@ public class AdminController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/admin/member/adMemList.jsp";
 		}
+		else if(com.equals("adMemChoice")) {
+			command = new AdMemChoiceCommand();
+			command.execute(request, response);
+			viewPage += "/admin/member/adMemList.jsp";
+		}
 		else if(com.equals("adMemLevelChange")) {
 			command = new AdMemLevelChangeCommand();
 			command.execute(request, response);

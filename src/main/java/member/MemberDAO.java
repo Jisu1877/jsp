@@ -136,7 +136,7 @@ public class MemberDAO {
 	public MemberVO getUserInfor(String mid) {
 		vo = new MemberVO();
 		try {
-			sql = "select * from member where mid = ?";
+			sql = "select *, timestampdiff(DAY, lastDate, NOW()) as applyDiff from member where mid = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, mid);
 			rs = pstmt.executeQuery();
@@ -165,6 +165,7 @@ public class MemberDAO {
 				vo.setStartDate(rs.getString("startDate"));
 				vo.setLastDate(rs.getString("lastDate"));
 				vo.setTodayCnt(rs.getInt("todayCnt"));
+				vo.setApplyDiff(rs.getInt("applyDiff"));
 			}
 			
 		} catch (SQLException e) {
@@ -371,5 +372,51 @@ public class MemberDAO {
 			getConn.pstmtClose();
 		}
 		return res;
+	}
+
+	public ArrayList<MemberVO> getChoiceMemList(int choiceLevel) {
+		ArrayList<MemberVO> vos = new ArrayList<MemberVO>();
+		try {
+			sql = "select *,timestampdiff(DAY, lastDate, NOW()) as applyDiff from member where level = ? order by idx desc";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, choiceLevel);
+			rs = pstmt.executeQuery();
+			
+				while(rs.next()) {
+					vo = new MemberVO();
+					
+					vo.setIdx(rs.getInt("idx"));
+					vo.setMid(rs.getString("mid"));
+					vo.setPwd(rs.getString("pwd"));
+					vo.setNickName(rs.getString("nickName"));
+					vo.setName(rs.getString("name"));
+					vo.setGender(rs.getString("gender"));
+					vo.setBirthday(rs.getString("birthday"));
+					vo.setTel(rs.getString("tel"));
+					vo.setAddress(rs.getString("address"));
+					vo.setEmail(rs.getString("email"));
+					vo.setHomePage(rs.getString("homePage"));
+					vo.setJob(rs.getString("job"));
+					vo.setHobby(rs.getString("hobby"));
+					vo.setPhoto(rs.getString("photo"));
+					vo.setContent(rs.getString("content"));
+					vo.setUserInfor(rs.getString("userInfor"));
+					vo.setUserDel(rs.getString("userDel"));
+					vo.setPoint(rs.getInt("point"));
+					vo.setLevel(rs.getInt("level"));
+					vo.setVisitCnt(rs.getInt("visitCnt"));
+					vo.setStartDate(rs.getString("startDate"));
+					vo.setLastDate(rs.getString("lastDate"));
+					vo.setTodayCnt(rs.getInt("todayCnt"));
+					vo.setApplyDiff(rs.getInt("applyDiff"));
+					
+					vos.add(vo);
+				}
+		} catch (SQLException e) {
+			System.out.println("sql 에러" + e.getMessage());
+		} finally {
+			getConn.rsClose();
+		}
+		return vos;
 	}
 }
