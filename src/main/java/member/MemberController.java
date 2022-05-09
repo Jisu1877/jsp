@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.oreilly.servlet.MultipartRequest;
 
@@ -20,6 +21,11 @@ public class MemberController extends HttpServlet {
 		String uri = request.getRequestURI();
 		String com = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
 		
+		//세션이 끊겼으면 작업의 진행을 홈으로 보낸다.(비정상적인 접근)
+		HttpSession session = request.getSession();
+		int level = session.getAttribute("sLevel") == null ? 99 : (int)session.getAttribute("sLevel");
+		
+		
 		if(com.equals("memLogin")) {
 			command = new MemLoginCommand();
 			command.execute(request, response);
@@ -27,11 +33,6 @@ public class MemberController extends HttpServlet {
 		}
 		else if(com.equals("memLoginOk")) {
 			command = new MemLoginOkCommand();
-			command.execute(request, response);
-			viewPage = "/message/message.jsp";
-		}
-		else if(com.equals("memLogOut")) {
-			command = new MemLogOutCommand();
 			command.execute(request, response);
 			viewPage = "/message/message.jsp";
 		}
@@ -53,11 +54,6 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage += "/member/memNickCheck.jsp";
 		}
-		else if(com.equals("memMain")) {
-			command = new MemMainCommand();
-			command.execute(request, response);
-			viewPage += "/member/memMain.jsp";
-		}
 		else if(com.equals("memIdFind")) {
 			viewPage += "/member/memIdFind.jsp";
 		}
@@ -73,6 +69,20 @@ public class MemberController extends HttpServlet {
 			command = new MemPwdFindCommand();
 			command.execute(request, response);
 			viewPage = "/message/message.jsp";
+		}
+		else if(level == 99) { //세션이 끊겼으면 작업의 진행을 홈으로 보낸다.(비정상적인 접근)
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
+			dispatcher.forward(request, response);
+		}
+		else if(com.equals("memLogOut")) {
+			command = new MemLogOutCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		else if(com.equals("memMain")) {
+			command = new MemMainCommand();
+			command.execute(request, response);
+			viewPage += "/member/memMain.jsp";
 		}
 		else if(com.equals("memPwdInput")) {
 			viewPage += "/member/memPwdInput.jsp";
@@ -109,6 +119,21 @@ public class MemberController extends HttpServlet {
 		}
 		else if(com.equals("memUserDelete")) {
 			command = new MemUserDeleteCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		else if(com.equals("memUpdate")) {
+			command = new MemUpdateCommand();
+			command.execute(request, response);
+			viewPage += "/member/memUpdate.jsp";
+		}
+		else if(com.equals("memUpdateOk")) {
+			command = new MemUpdateOkCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		else if(com.equals("memUpdatePwd")) {
+			command = new MemUpdatePwdCommand();
 			command.execute(request, response);
 			viewPage = "/message/message.jsp";
 		}

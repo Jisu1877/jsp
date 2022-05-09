@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<% pageContext.setAttribute("newLine", "\n"); %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,9 @@
     <jsp:include page="/include/bs4.jsp"/>
     <style>
 	html,body,h1,h2,h3,h4,h5,h6 {font-family: "Roboto", sans-serif}
+	span {
+		background-color: coral;
+	}
 	</style>
     <script type="text/javascript">
 	    function userDelCheck(idx) {
@@ -26,7 +30,7 @@
 
   <!-- The Grid -->
   <div class="w3-row-padding">
-  <h2 class="text-center">회원 상세 정보</h2><br>
+  <h2 class="text-center"><span>&nbsp;&nbsp;회원 상세 정보&nbsp;&nbsp;</span></h2><br>
     <!-- Left Column -->
     <div class="w3-half">
     
@@ -82,7 +86,7 @@
           <c:set var="content" value="${vo.content}"/>
           <c:choose>
           	<c:when test="${fn:length(content)>1}">
-          		${content}
+          		${fn:replace(content, newLine, '<br/>')}
           	</c:when>
           	<c:otherwise>
           		- 미입력 -

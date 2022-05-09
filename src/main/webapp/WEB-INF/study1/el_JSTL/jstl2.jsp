@@ -1,3 +1,4 @@
+<%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
@@ -22,6 +23,9 @@
 				// 0123456789012345678901234
  	String atom = "Welcome to My Homepage!";
 	pageContext.setAttribute("atom", atom);
+	
+/* 	Date now = new Date();
+	pageContext.setAttribute("now", now); */
 %>
 	<p>
 		atom변수의 값 : <%=atom %> / ${atom}<br>

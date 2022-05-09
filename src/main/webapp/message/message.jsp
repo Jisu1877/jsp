@@ -45,6 +45,9 @@
     	else if(msg == "memDeleteUpdateOk") msg = "회원탈퇴가 완료되었습니다.";
     	else if(msg == "UserDeleteOk") msg = "회원DB에서 삭제가 완료되었습니다.";
     	else if(msg == "UserDeleteNo") msg = "회원 삭제에 실패했습니다.";
+    	else if(msg == "passwordNo") msg = "비밀번호가 일치하지 않습니다.";
+    	else if(msg == "memUpdateOk") msg = "회원정보 수정이 완료되었습니다.";
+    	else if(msg == "memUpdateNo") msg = "회원정보 수정에 실패했습니다.";
     	
     	
     	alert(msg);
