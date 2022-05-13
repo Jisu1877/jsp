@@ -47,6 +47,11 @@ public class AdminController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/message/message.jsp";
 		}
+		else if(com.equals("adBoList")) {
+			command = new AdBoListCommand();
+			command.execute(request, response);
+			viewPage += "/admin/board/adBoList.jsp";
+		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
 		dispatcher.forward(request, response);

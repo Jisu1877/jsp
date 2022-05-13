@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import study1.ajax1.Ajax1Command;
+import study1.sha256.ShaPassOkCommand;
+
 @WebServlet("*.st")
 public class StudyController extends HttpServlet{
 	@Override
@@ -38,6 +41,11 @@ public class StudyController extends HttpServlet{
 			command = new ShaPassOkCommand();
 			command.execute(request, response);
 			viewPage += "/study1/sha/shaPass.jsp";
+		}
+		else if(com.equals("ajax1")) {
+			command = new Ajax1Command();
+			command.execute(request, response);
+			viewPage += "/study1/ajax/ajax1.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);

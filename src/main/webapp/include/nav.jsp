@@ -14,8 +14,18 @@
 	}
 }
 </script>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-  <a class="navbar-brand" href="<%=request.getContextPath()%>/">Home</a>
+<style>
+	.navstyle {
+		background-color : coral;
+	}
+	
+	a:hover {
+	 	color : burlywood;
+	 	text-decoration: none;
+	 }
+</style>
+<nav class="navbar navbar-expand-sm navstyle"> <!-- bg-dark navbar-dark -->
+  <a class="navbar-brand font-weight-bold" href="<%=request.getContextPath()%>/">Home</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
     <span class="navbar-toggler-icon"></span>
   </button> 
@@ -26,7 +36,7 @@
       </li>
 <% 	  if(level != 99) { %>
       <li class="nav -item">
-        <a class="nav-link" href="#">BOARD</a>
+        <a class="nav-link" href="<%=request.getContextPath()%>/boList.bo">BOARD</a>
       </li>
 <% 	  }
 	  if(level != 99 && level != 1) {%>     
@@ -54,6 +64,7 @@
         <div class="dropdown">
 	    	<div class="dropdown-menu">
 		      <a class="dropdown-item" href="<%=request.getContextPath()%>/study1/shaPass.st">SHA 암호화</a>
+		      <a class="dropdown-item" href="<%=request.getContextPath()%>/study1/ajax1.st">ajax연습1</a>
 	    	</div>
   		</div>
       </li>
@@ -80,7 +91,7 @@
 	    	</div>
   		</div>
       </li>
-<%	  } %>  
+<%	  } %> 
       <li class="nav-item font-weight-bold">
 <%    if(level != 99) { %>
       	<a class="nav-link" href="<%=request.getContextPath()%>/memLogOut.mem">Logout</a>

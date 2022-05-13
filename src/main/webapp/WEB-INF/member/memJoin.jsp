@@ -34,7 +34,7 @@
 		let email = email1 + '@' + email2;
 		let homePage = myForm.homePage.value;
 		let tel1 = myForm.tel1.value;
-	    let tel2 = myForm.tel2.value;
+	    let tel2 = myForm.tel2.value; 
 	    let tel3 = myForm.tel3.value;
 	    let tel = myForm.tel1.value + "-" + myForm.tel2.value + "-" + myForm.tel3.value;
 		

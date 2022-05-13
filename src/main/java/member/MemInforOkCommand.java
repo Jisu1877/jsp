@@ -12,7 +12,7 @@ public class MemInforOkCommand implements MemberInterface {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String choseMid = (String) session.getAttribute("choseMid");
+		String choseMid = (String) session.getAttribute("choseMid") == null ? request.getParameter("mid") : (String) session.getAttribute("choseMid");
 		
 		MemberDAO dao = new MemberDAO();
 		MemberVO vo = dao.getUserInfor(choseMid);

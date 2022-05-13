@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<div class="jumbotron text-center" style="margin-bottom:0; height:160px; padding-top:40px">
-  <h1>이지수 JSP 프로젝트</h1>
-  <p>(본 프로젝트는 반응형으로 제작되었습니다.)</p> 
-</div>
+<!-- <div class="jumbotron text-center" style="margin-bottom:0; height:160px; padding-top:40px"> -->
+<header class="w3-container w3-center w3-padding-32"> 
+  <h1><b>JISU</b></h1>
+  <p>Welcome to <span class="w3-tag">JISU's Homepage</span></p>
+</header>
+<!-- </div> -->

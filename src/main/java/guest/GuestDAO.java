@@ -78,6 +78,35 @@ public class GuestDAO {
 		return vos;
 	}
 	
+	//전체 방명록 리스트 검색
+	public ArrayList<GuestVO> getGuestListHome() {
+		ArrayList<GuestVO> vos = new ArrayList<GuestVO>();
+		try {
+			sql = "select * from guest order by idx desc limit ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, 5);
+			rs = pstmt.executeQuery();
+			
+			while(rs.next()) {
+				vo = new GuestVO();
+				vo.setIdx(rs.getInt("idx"));
+				vo.setName(rs.getString("name"));
+				vo.setEmail(rs.getString("email"));
+				vo.setHomepage(rs.getString("homepage"));
+				vo.setvDate(rs.getString("vDate"));
+				vo.setHostIp(rs.getString("hostIp"));
+				vo.setContent(rs.getString("content"));
+				
+				vos.add(vo);
+			}
+		} catch (SQLException e) {
+			System.out.println("sql 에러 : "  + e.getMessage());
+		} finally {
+			rsClose();
+		}
+		return vos;
+	}
+	
 	//방명록 등록
 	public int setGuestInput(GuestVO vo) {
 		int res = 0;

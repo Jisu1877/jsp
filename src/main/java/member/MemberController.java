@@ -70,6 +70,11 @@ public class MemberController extends HttpServlet {
 			command.execute(request, response);
 			viewPage = "/message/message.jsp";
 		}
+		else if(com.equals("memMessage")) {
+			command = new MemMessageCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
 		else if(level == 99) { //세션이 끊겼으면 작업의 진행을 홈으로 보낸다.(비정상적인 접근)
 			RequestDispatcher dispatcher = request.getRequestDispatcher("/");
 			dispatcher.forward(request, response);
@@ -133,7 +138,10 @@ public class MemberController extends HttpServlet {
 			viewPage = "/message/message.jsp";
 		}
 		else if(com.equals("memUpdatePwd")) {
-			command = new MemUpdatePwdCommand();
+			viewPage += "/member/memUpdatePwd.jsp";
+		}
+		else if(com.equals("memUpdatePwdOk")) {
+			command = new MemUpdatePwdOkCommand();
 			command.execute(request, response);
 			viewPage = "/message/message.jsp";
 		}

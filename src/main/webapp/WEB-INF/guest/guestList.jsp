@@ -62,29 +62,28 @@ if(!admin.equals("adminOk")) {
 			<a href="${ctp}/guestInput.gu" class="btn btn-secondary">글쓰기</a>
 		</div>
 		<%-- <div class="col text-left"><a href="${ctp}/guestInput.gu" class="btn btn-secondary">글쓰기</a></div> --%>
-		
-		<!-- 페이징 처리 시작 -->
-		<div class="col text-right">
-			<%
-			if(pag > 1)
-			%>
-				<a href = "guestList.gu?pag=1" title="첫페이지">|◁</a>
-				<a href = "guestList.gu?pag=<%=pag-1%>" title="이전페이지">◀</a>
-			<%
-
-			%>
-			<%=pag%>Page / <%=totPage%>Pages
-			<%
-			if(pag != totPage)
-			%>
-				<a href = "guestList.gu?pag=<%=pag+1%>" title="다음페이지">▶</a>
-				<a href = "guestList.gu?pag=<%=totPage%>" title="마지막페이지">▷|</a>
-			<%
-
-			%>
-		</div>
-		<!-- 페이징 처리 끝 -->
 	</div>
+	<!-- 페이징 처리 시작 -->
+	<div class="text-center">
+		<%
+		if(pag > 1)
+		%>
+			<a href = "guestList.gu?pag=1" title="첫페이지">|◁</a>
+			<a href = "guestList.gu?pag=<%=pag-1%>" title="이전페이지">◀</a>
+		<%
+
+		%>
+		<%=pag%>Page / <%=totPage%>Pages
+		<%
+		if(pag != totPage)
+		%>
+			<a href = "guestList.gu?pag=<%=pag+1%>" title="다음페이지">▶</a>
+			<a href = "guestList.gu?pag=<%=totPage%>" title="마지막페이지">▷|</a>
+		<%
+
+		%>
+	</div>
+	<!-- 페이징 처리 끝 -->
 	
 <%
 	GuestVO vo = new GuestVO();

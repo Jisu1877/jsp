@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%-- <%@ page session="false" %> 서버의 부담을 줄이기 위해 세션을 끊어주기 --%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="ctp" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
@@ -74,7 +75,7 @@
 				      <div class="invalid-feedback">비밀번호는 필수 입력사항입니다.</div>
 				    </div>
 				    <div class="form-group text-center">
-					<button type="button" class="btn btn-primary btn-sm" onclick="fCheck()">로그인</button> &nbsp;&nbsp;		
+					<button type="submit" class="btn btn-primary btn-sm" onclick="fCheck()">로그인</button> &nbsp;&nbsp;		
 					<button type="reset" class="btn btn-secondary btn-sm">취소</button>	&nbsp;&nbsp;			
 					<button type="button" class="btn btn-secondary btn-sm" onclick="location.href='${ctp}/';">돌아가기</button>&nbsp;&nbsp;			
 					<button type="button" class="btn btn-primary btn-sm" onclick="location.href='${ctp}/memJoin.mem';">회원가입</button>

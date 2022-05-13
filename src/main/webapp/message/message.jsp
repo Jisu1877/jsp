@@ -48,6 +48,16 @@
     	else if(msg == "passwordNo") msg = "비밀번호가 일치하지 않습니다.";
     	else if(msg == "memUpdateOk") msg = "회원정보 수정이 완료되었습니다.";
     	else if(msg == "memUpdateNo") msg = "회원정보 수정에 실패했습니다.";
+    	else if(msg == "boInputOk") msg = "게시글이 등록되었습니다.";
+    	else if(msg == "boInputNo") msg = "게시글 등록 실패.";
+    	else if(msg == "memUpdatePwdNo") msg = "현재 비밀번호가 일치하지 않습니다.";
+    	else if(msg == "memUpdatePwdNoNo") msg = "비밀번호 변경 실패";
+    	else if(msg == "memUpdatePwdOk") msg = "비밀번호 변경이 완료되었습니다.";
+    	else if(msg == "loginRequest") msg = "로그인 후 이용해주세요.";
+    	else if(msg == "boUpdateOk") msg = "게시글 수정이 완료되었습니다.";
+    	else if(msg == "boUpdateNo") msg = "게시글 수정에 실패했습니다.";
+    	else if(msg == "boDeleteOk") msg = "게시글이 삭제되었습니다.";
+    	else if(msg == "boDeleteNo") msg = "게시글 삭제에 실패했습니다.\n댓글을 먼저 지워주세요.";
     	
     	
     	alert(msg);
