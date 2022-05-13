@@ -57,7 +57,7 @@
     	else if(msg == "boUpdateOk") msg = "게시글 수정이 완료되었습니다.";
     	else if(msg == "boUpdateNo") msg = "게시글 수정에 실패했습니다.";
     	else if(msg == "boDeleteOk") msg = "게시글이 삭제되었습니다.";
-    	else if(msg == "boDeleteNo") msg = "게시글 삭제에 실패했습니다.\n댓글을 먼저 지워주세요.";
+    	else if(msg == "boDeleteNo") msg = "게시글 삭제에 실패했습니다.\n댓글을 먼저 지워주셔야합니다.";
     	
     	
     	alert(msg);
