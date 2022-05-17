@@ -10,6 +10,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import study1.ajax1.Ajax1Command;
+import study1.pdsTest.DownLoad1Command;
+import study1.pdsTest.FileDeleteCommand;
+import study1.pdsTest.UpLoad1OkCommand;
+import study1.pdsTest.UpLoad2OkCommand;
 import study1.sha256.ShaPassOkCommand;
 
 @WebServlet("*.st")
@@ -46,6 +50,32 @@ public class StudyController extends HttpServlet{
 			command = new Ajax1Command();
 			command.execute(request, response);
 			viewPage += "/study1/ajax/ajax1.jsp";
+		}
+		else if(com.equals("upLoad1")) {
+			viewPage += "/study1/pdsTest/upLoad1.jsp";
+		}
+		else if(com.equals("upLoad1Ok")) {
+			command = new UpLoad1OkCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
+		}
+		else if(com.equals("downLoad1")) {
+			command = new DownLoad1Command();
+			command.execute(request, response);
+			viewPage += "/study1/pdsTest/downLoad1.jsp";
+		}
+		else if(com.equals("fileDelete")) {
+			command = new FileDeleteCommand();
+			command.execute(request, response);
+			return;
+		}
+		else if(com.equals("upLoad2")) {
+			viewPage += "/study1/pdsTest/upLoad2.jsp";
+		}
+		else if(com.equals("upLoad2Ok")) {
+			command = new UpLoad2OkCommand();
+			command.execute(request, response);
+			viewPage = "/message/message.jsp";
 		}
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher(viewPage);
